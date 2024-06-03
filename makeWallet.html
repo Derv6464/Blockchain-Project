@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Include the Web3 library -->
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <!-- Include the jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Include your CSS file -->
     <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css"
@@ -29,43 +26,38 @@
       </div>
       <main class="container" style="text-align: center;">
         <h1>Create a Wallet</h1>
-
             <div role="group">
                 <input type="password" id="password" placeholder="Enter a password for the Key Store">
                 <button id="createWalletButton">Make</button>
             </div>
-
-
         <a class="button" id="downloadKeystore" download="wallet.json"><button class="outline">Download Keystore</button></a>
         <br/>
         <br/>
         <article>
             <h2>Wallet Information:</h2>
-        <div class="grid">
-            <div>
-                <label for="walletAddress">Wallet Address:</label>
-                <textarea id="walletAddress" readonly rows="2" cols="50"></textarea>
-                 <label for="privateKey">Private Key:</label>
-                <textarea id="privateKey" readonly rows="3" cols="50"></textarea>
+            <div class="grid">
+                <div>
+                    <label for="walletAddress">Wallet Address:</label>
+                    <textarea id="walletAddress" readonly rows="2" cols="50"></textarea>
+                    <label for="privateKey">Private Key:</label>
+                    <textarea id="privateKey" readonly rows="3" cols="50"></textarea>
+                </div>
+                <div>
+                    <label for="keystore">Keystore File:</label>
+                    <textarea id="keystore" readonly rows="8" cols="50"></textarea>
+                </div>
             </div>
-            <div>
-                <label for="keystore">Keystore File:</label>
-                <textarea id="keystore" readonly rows="8" cols="50"></textarea>
-            </div>
-        </div>
-    </article>
-    </div>
+        </article>
 
-    <dialog id="error">
-      <article>
-      <h2>Error</h2>
-      <p id='errorContent'></p>
-      </article>
-    </dialog>
-  
-</body>
+        <dialog id="error">
+            <article>
+                <h2>Error</h2>
+                <p id='errorContent'></p>
+            </article>
+        </dialog>
 
-<script src="./js/makeWallet.js" type="module"></script>
-<script src="./js/errorModal.js" type="module"></script>
-
+      </main>
+    </body>
+    <script src="./js/makeWallet.js" type="module"></script>
+    <script src="./js/errorModal.js" type="module"></script>
 </html>

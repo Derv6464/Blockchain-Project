@@ -1,11 +1,4 @@
-/*
- * Modal
- *
- * Pico.css - https://picocss.com
- * Copyright 2019-2024 - Licensed under MIT
- */
-
-// Config
+//mostly taken from picocss modal example
 const isOpenClass = "modal-is-open";
 const openingClass = "modal-is-opening";
 const closingClass = "modal-is-closing";
@@ -15,7 +8,6 @@ let visibleModal = null;
 
 // Toggle modal
 export const toggleModal = (text, id) => {
-  //event.preventDefault();
   const modal = document.getElementById(id);
   const modalContent = document.getElementById("modalContent");
   if (!modal) return;
@@ -23,7 +15,7 @@ export const toggleModal = (text, id) => {
   modal && (modal.open ? closeModal(modal) : openModal(modal));
 };
 
-// Open modal
+// Open general modal
 export const openModal = (modal) => {
   const { documentElement: html } = document;
   const scrollbarWidth = getScrollbarWidth();
@@ -38,7 +30,7 @@ export const openModal = (modal) => {
   modal.showModal();
 };
 
-// Close modal
+// Close gerneral modal
 export const closeModal = (modal) => {
   visibleModal = null;
   const { documentElement: html } = document;
@@ -73,7 +65,6 @@ const getScrollbarWidth = () => {
 };
 
 export const toggleModalError = (text, id) => {
-  //event.preventDefault();
   const modal = document.getElementById(id);
   const modalContent = document.getElementById("errorContent");
   if (!modal) return;
@@ -81,7 +72,7 @@ export const toggleModalError = (text, id) => {
   modal && (modal.open ? closeModalError(modal) : openModalError(modal));
 };
 
-// Open modal
+// Open error modal
 export const openModalError = (modal) => {
   const { documentElement: html } = document;
   const scrollbarWidth = getScrollbarWidth();
@@ -96,7 +87,7 @@ export const openModalError = (modal) => {
   modal.showModal();
 };
 
-// Close modal
+// Close error modal
 export const closeModalError = (modal) => {
   visibleModal = null;
   const { documentElement: html } = document;
@@ -108,14 +99,13 @@ export const closeModalError = (modal) => {
   }, animationDuration);
 };
 
-export const toggleModalLoading = (text, id) => {
-  //event.preventDefault();
+export const toggleModalLoading = (id) => {
   const modal = document.getElementById(id);
   if (!modal) return;
   modal && (modal.open ? closeModalLoading(modal) : openModalLoading(modal));
 };
 
-// Open modal
+// Open loading modal
 export const openModalLoading = (modal) => {
   const { documentElement: html } = document;
   const scrollbarWidth = getScrollbarWidth();
@@ -130,7 +120,7 @@ export const openModalLoading = (modal) => {
   modal.showModal();
 };
 
-// Close modal
+// Close loading modal
 export const closeModalLoading = (modal) => {
   visibleModal = null;
   const { documentElement: html } = document;

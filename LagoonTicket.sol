@@ -18,6 +18,8 @@ contract LagoonTicket is IERC20 {
     string public symbol;
     uint8 public decimals;
     uint256 private _totalSupply;
+    address venue;
+    uint256 public ticketPrice = 0.00001 ether;
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
 
@@ -27,6 +29,7 @@ contract LagoonTicket is IERC20 {
         decimals = _decimals;
         _totalSupply = initialSupply * 10**uint256(decimals);
         _balances[msg.sender] = _totalSupply;
+        venue = msg.sender;
         emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
@@ -62,7 +65,7 @@ contract LagoonTicket is IERC20 {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
         require(_balances[sender] >= amount, "ERC20: transfer amount exceeds balance");
-        
+
         _balances[sender] -= amount;
         _balances[recipient] += amount;
         emit Transfer(sender, recipient, amount);
@@ -76,26 +79,20 @@ contract LagoonTicket is IERC20 {
         emit Approval(owner, spender, amount);
     }
 
-    
-    function buyTickets(uint256 amount) external payable {
-        require(msg.value >= 0.00001 ether, "Not enough ETH sent; check price!");
 
-        // Calculate the token amount. Here we're assuming 1 token for 0.00001 ETH.
-        // Adjust this if you want a different ratio.
-        uint256 tokenAmount = msg.value / 0.00001 ether;
-        // convert tokenAmount to wei
-        tokenAmount = tokenAmount * 10**uint256(decimals) * amount;
-        // Transfer the tokens to the sender
+    function buyTickets() external payable {
+        require(msg.value >= ticketPrice, "Not enough ETH sent; check price!");
 
-
-         // 1 token for 0.00001 ETH.
-        //uint256 tokenAmount = (msg.value / ticketPrice) * (10**uint256(decimals));
-
-        _transfer(address(this), msg.sender, tokenAmount);
+        uint256 tokenAmount = msg.value / ticketPrice;
+        tokenAmount = tokenAmount * (10**uint256(decimals));
+        _transfer(venue, msg.sender, tokenAmount);
     }
 
     function returnTokens(uint256 amount) external {
         require(_balances[msg.sender] >= amount, "ERC20: return amount exceeds balance");
-        _transfer(msg.sender, address(this), amount);
+        _transfer(msg.sender, venue, amount);
+        uint256 returnAmount = amount * ticketPrice;
+
+        payable(msg.sender).transfer(returnAmount);
     }
 }
