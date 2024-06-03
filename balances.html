@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
+        />
+        <link rel="stylesheet" href="font.css" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html" class="contrast"
+                            ><strong>The Green Lagoon</strong></a
+                        >
+                    </li>
+                </ul>
+                <ul>
+                    <li><a href="makeWallet.html">Make a Wallet</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="balances.html">Check Balances</a></li>
+                </ul>
+            </nav>
+        </div>
+        <main class="container">
+            <h1>Check Balance</h1>
+            <details open>
+                <summary role="button" class="outline">Attendee</summary>
+                <label for="walletAddress">Enter your wallet address:</label>
+                <div role="group">
+                    <input
+                        type="text"
+                        id="walletAddress"
+                        name="walletAddress"
+                    />
+                    <button id="UserBalanceButton">Check</button>
+                </div>
+                <div class="grid">
+                    <div>
+                        <article>
+                            <header>
+                                <strong>Check Crypto balance</strong>
+                            </header>
+                            <label id="cryptoBalance">Crypto Balance: </label>
+                        </article>
+                    </div>
+                    <div>
+                        <article>
+                            <header>
+                                <strong>Check Ticket balance</strong>
+                            </header>
+                            <label id="tokenBalance">Token Balance:</label>
+                            <label id="tokenName">Token Name:</label>
+                            <label id="tokenSymbol">Token Symbol:</label>
+                            <label id="tokenDecimals">Token Decimals:</label>
+                            <label id="tokenTotalSupply"
+                                >Token Total Supply:</label
+                            >
+                        </article>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary role="button" class="outline">Venue</summary>
+                <button id="VenueBalanceButton">Check</button>
+                <br/>
+                <br/>
+                <div class="grid">
+                    <div>
+                        <article>
+                            <header>
+                                <strong>Check Crypto balance</strong>
+                            </header>
+                            <label id="cryptoBalanceVenue">Crypto Balance: </label>
+                        </article>
+                    </div>
+                    <div>
+                        <article>
+                            <header>
+                                <strong>Check Ticket balance</strong>
+                            </header>
+                            <label id="tokenBalanceVenue">Tickets to sell:</label>
+                            <label id="tokenSoldVenue">Sold Tickets:</label>
+                            <label id="tokenTotalSupplyVenue"
+                                >Total Ticket Supply:</label
+                            >
+                        </article>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary role="button" class="outline">Doorman</summary>
+                <label for="walletAddressDoorman"
+                    ></label> Enter Attendee's wallet address:</label
+                >
+                <div role="group">
+                    <input
+                        type="text"
+                        id="walletAddressDoorman"
+                        name="walletAddressDoorman"
+                    />
+                    <button id="DoormanBalanceButton">Check</button>
+                </div>
+                <article>
+                    <header><strong>Check Ticket balance</strong></header>
+                    <label id="letIn">Scan Ticket</label>
+                    <label id="tokenBalanceDoor">Token Balance:</label>
+                </article>
+            </details>
+            <dialog id="error">
+                <article>
+                <h2>Error</h2>
+                <p id='errorContent'></p>
+                </article>
+            </dialog>
+        </main>
+    </body>
+    <script src="./js/balances.js" type="module"></script>
+    <script src="./js/errorModal.js" type="module"></script>
+</html>

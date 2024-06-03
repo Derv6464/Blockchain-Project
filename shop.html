@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include the Web3 library -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <!-- Include the jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include your CSS file -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css"
+  />
+  <link rel="stylesheet" href="font.css" />
+    <title>Decrypt a wallet</title>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <nav>
+          <ul>
+            <li><a href="index.html" class="contrast">The Green Lagoon</strong></a></li>
+          </ul>
+          <ul>
+            <li><a href="makeWallet.html">Make a Wallet</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="balances.html">Check Balances</a></li>
+          </ul>
+        </nav>
+      </div>
+    <main class="container-fluid" style="text-align: center;">
+        <h1 class="krakoa"> < </h1>
+    <h1>Load Your Wallet</h1>
+    <div class="grid">
+        <article>
+            <header><h3>Load Your Wallet</h3></header>
+            <input type="file" id="keystoreFile" accept=".json">
+            <div role="group">
+                <input type="password" id="password" placeholder="Enter a password for the Key Store">
+                <button id="loadWalletButton">Load</button>
+            </div>
+            <button id="seeInfo">See your Info</button>
+
+        </article>
+        <article>
+            <header><h3>Your Balance</h3></header>
+            <label for="cryptoBalance">SETH Balance:</label>
+            <textarea id="cryptoBalance" readonly rows="1" cols="50"></textarea>
+             <label for="tokenBalance">Ticket Balance:</label>
+            <textarea id="tokenBalance" readonly rows="1" cols="50"></textarea>
+
+        </article>
+
+    </div>
+
+    <h1>Shop</h1>
+    <div class="grid">
+        <article>
+            <header><h3>Buy a Ticket</h3></header>
+            <p>Cost : 0.00001 ether </p>
+            <input id="amountToPay" type="number" id="amount" placeholder="Enter the amount of tickets">
+            <button id="buyTokensButton">Buy Tokens</button>
+
+
+        </article>
+        <article>
+            <header><h3>Sell a Ticket</h3></header>
+            <p>Sell for: 0.00001 ether </p>
+            <input id="amountToSell" type="number" id="amount" placeholder="Enter the amount of tickets to sell">
+            <button id="sellTokensButton">Buy Tokens</button>
+        </article>
+    </div>
+
+    <dialog id="walletInfo">
+    <article>
+        <h2>Wallet Information:</h2>
+    <div class="grid">
+        <div>
+            <p id='modalContent'></p>
+            <label for="walletAddress">Wallet Address:</label>
+            <textarea id="walletAddress" readonly rows="2" cols="50"></textarea>
+             <label for="privateKey">Private Key:</label>
+            <textarea id="privateKey" readonly rows="2" cols="50"></textarea>
+        </div>
+        <div>
+            <label for="keystore">Keystore File:</label>
+            <textarea id="keystore" readonly rows="7" cols="50"></textarea>
+        </div>
+    </div>
+</article>
+</dialog >
+
+    <dialog id="result">
+    <article>
+        <h2>Transaction Result</h2>
+        <p id='modalContent'></p>
+    <div>
+        <br/>
+            <label for="transactionRequest">Transaction Request: </label>
+            <textarea id="transactionRequest"  readonly rows="5" cols="50"></textarea>
+            <label for="transactionResult">Transaction Result: </label>
+            <textarea id="transactionResult"  readonly rows="5" cols="50"></textarea>
+    </div>
+</article>
+</dialog>
+
+<dialog id="loading">
+    <article>
+    <h2>Transaction in Progress</h2>
+    <progress />
+</article>
+</dialog>
+
+<dialog id="error">
+    <article>
+    <h2>Error</h2>
+    <p id='errorContent'></p>
+</article>
+</dialog>
+
+</main>
+<script type="module" src="./js/shop.js"></script>
+<script src="./js/errorModal.js" type="module"></script>
+</body>
