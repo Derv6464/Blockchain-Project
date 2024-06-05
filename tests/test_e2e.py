@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 from pyvirtualdisplay import Display
 import time
 import unittest
+import os
 
 display = Display(visible=0, size=(800, 800))
 display.start()
