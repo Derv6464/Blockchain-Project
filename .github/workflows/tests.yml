@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - "main"
-      - "total-normal-pipelines"
   pull_request:
     branches:
       - "main"
@@ -19,6 +18,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
@@ -29,26 +29,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install chromedriver-autoinstaller selenium pyvirtualdisplay
 
-      - name: Installing package list
-        run: apt list --installed
+      - name: Install package list
+        run: sudo apt-get update && apt list --installed
 
-      - name: Removing previous Chrome instances on runner
-        run: sudo apt purge google-chrome-stable
+      - name: Remove previous Chrome instances on runner
+        run: sudo apt-get purge -y google-chrome-stable
 
       - name: Install xvfb
-        run: sudo apt-get install xvfb
+        run: sudo apt-get install -y xvfb
 
-      - uses: actions/setup-node@v4
-      - name: Install http-server
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - run: npm install -i http-server
+          node-version: "18"
+
+      - name: Install http-server
+        run: npm install -g http-server
 
       - name: Start the server
         run: |
-          http-server -p 5000 &
+          http-server &
           sleep 3
 
       - name: Run the tests
-        run: |
-          python tests.py
+        run: python3 tests/test_e2e.py
