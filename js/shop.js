@@ -65,14 +65,14 @@ $("#buyTokensButton").click(function () {
   };
   console.log(tx);
 
-  toggleModalLoading("Transaction in progress", "loading");
+  toggleModalLoading("loading");
   web3.eth.accounts.signTransaction(tx, privateKey).then(function (signedTx) {
     web3.eth
       .sendSignedTransaction(signedTx.rawTransaction)
       .on("receipt", function (receipt) {
-        toggleModalLoading("Transaction in progress", "loading");
         $("#transactionRequest").val(JSON.stringify(tx));
         $("#transactionResult").val(JSON.stringify(receipt));
+        toggleModalLoading("loading");
         toggleModal("Transaction complete", "result");
         getCryptoBalance();
       });
@@ -101,7 +101,7 @@ $("#sellTokensButton").click(function () {
   };
   console.log(tx);
 
-  toggleModalLoading("Transaction in progress", "loading");
+  toggleModalLoading("loading");
 
   web3.eth.accounts.signTransaction(tx, privateKey).then(function (signedTx) {
     web3.eth
@@ -109,7 +109,7 @@ $("#sellTokensButton").click(function () {
       .on("receipt", function (receipt) {
         $("#transactionRequest").val(JSON.stringify(tx));
         $("#transactionResult").val(JSON.stringify(receipt));
-        toggleModalLoading("Transaction in progress", "loading");
+        toggleModalLoading("loading");
         toggleModal("Transaction complete", "result");
         getCryptoBalance();
         getTokenBalance();

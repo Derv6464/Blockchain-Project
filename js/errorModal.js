@@ -100,6 +100,7 @@ export const closeModalError = (modal) => {
 };
 
 export const toggleModalLoading = (id) => {
+  // console.log("loding");
   const modal = document.getElementById(id);
   if (!modal) return;
   modal && (modal.open ? closeModalLoading(modal) : openModalLoading(modal));
