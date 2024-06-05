@@ -1,7 +1,7 @@
 @font-face {
-    font-family: 'KrakoaFont';
-    src: url('./Krakoa3.ttf') format('woff2');
-  }
-  .krakoa {
-    font-family: 'KrakoaFont';
-  }
+    font-family: "KrakoaFont";
+    src: url(".assets/Krakoa3.ttf") format("woff2");
+}
+.krakoa {
+    font-family: "KrakoaFont";
+}
