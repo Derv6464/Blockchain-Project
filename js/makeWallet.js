@@ -2,6 +2,7 @@ import { toggleModalError } from "./errorModal.js";
 
 $(document).ready(function () {
   $("#createWalletButton").click(function () {
+    //creating a wallet & setting the values to the html
     var password = $("#password").val();
     if (password == "") {
       toggleModalError("Please enter a password for the Key Store", "error");
@@ -17,6 +18,7 @@ $(document).ready(function () {
 });
 
 $("#downloadKeystore").click(function () {
+  //downloading the keystore file
   var keystore = $("#keystore").val();
   if (keystore == "") {
     alert("Please create a wallet first");

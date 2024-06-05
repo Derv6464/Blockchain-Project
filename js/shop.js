@@ -4,12 +4,11 @@ import {
   toggleModalLoading,
   toggleModalError,
 } from "./errorModal.js";
-
 import { ABI, contractAddress } from "./contractInfo.js";
-
 var web3 = new Web3("https://rpc2.sepolia.org");
 
 $("#loadWalletButton").click(function () {
+  //loading the wallet from the keystore file, cheking password and setting the values to the html
   if ($("#password").val() == "") {
     toggleModalError("Please enter a password", "error");
     return;
@@ -43,6 +42,7 @@ $("#loadWalletButton").click(function () {
 });
 
 $("#buyTokensButton").click(function () {
+  //buying tokens
   var privateKey = $("#privateKey").val();
 
   if (privateKey == "") {
@@ -55,6 +55,7 @@ $("#buyTokensButton").click(function () {
   var transaction = contract.methods.buyTickets();
   var encodedABI = transaction.encodeABI();
   var amount = $("#amountToPay").val();
+  // 0.00001 ETH per token
   const amountInEther = String(0.00001 * amount);
   var tx = {
     from: wallet.address,
@@ -65,6 +66,7 @@ $("#buyTokensButton").click(function () {
   };
   console.log(tx);
 
+  //calling loading modal until transaction is done
   toggleModalLoading("loading");
   web3.eth.accounts.signTransaction(tx, privateKey).then(function (signedTx) {
     web3.eth
@@ -72,14 +74,15 @@ $("#buyTokensButton").click(function () {
       .on("receipt", function (receipt) {
         $("#transactionRequest").val(JSON.stringify(tx));
         $("#transactionResult").val(JSON.stringify(receipt));
+        //calling a result modal
         toggleModalLoading("loading");
         toggleModal("Transaction complete", "result");
-        getCryptoBalance();
       });
   });
 });
 
 $("#sellTokensButton").click(function () {
+  //selling tokens
   var privateKey = $("#privateKey").val();
 
   if (privateKey == "") {
@@ -99,8 +102,8 @@ $("#sellTokensButton").click(function () {
     gas: 2000000,
     data: encodedABI,
   };
-  console.log(tx);
 
+  //calling loading modal until transaction is done
   toggleModalLoading("loading");
 
   web3.eth.accounts.signTransaction(tx, privateKey).then(function (signedTx) {
@@ -109,15 +112,15 @@ $("#sellTokensButton").click(function () {
       .on("receipt", function (receipt) {
         $("#transactionRequest").val(JSON.stringify(tx));
         $("#transactionResult").val(JSON.stringify(receipt));
+        //calling a result modal
         toggleModalLoading("loading");
         toggleModal("Transaction complete", "result");
-        getCryptoBalance();
-        getTokenBalance();
       });
   });
 });
 
 $("#seeInfo").click(function () {
+  //opens modal to show wallet info
   if ($("#password").val() == "") {
     toggleModalError("Please enter a password", "error");
     return;
@@ -133,6 +136,7 @@ $("#seeInfo").click(function () {
 });
 
 function getCryptoBalance() {
+  //getting the balance of the wallet
   const walletAddress = $("#walletAddress").val();
   if (web3.utils.isAddress(walletAddress)) {
     web3.eth.getBalance(walletAddress).then(function (balance) {
@@ -145,6 +149,7 @@ function getCryptoBalance() {
 }
 
 function getTokenBalance() {
+  //getting the balance of the tokens
   const walletAddress = $("#walletAddress").val();
   const tokenAddress = contractAddress;
 
