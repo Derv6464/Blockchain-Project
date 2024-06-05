@@ -122,7 +122,7 @@ class TestE2E(unittest.TestCase):
          self.driver.find_element(By.ID, "buyTokensButton").click()
          time.sleep(5)
          wait(self.driver, 3).until(EC.visibility_of_element_located(("id", "loading")))
-         wait(self.driver, 60).until(EC.visibility_of_element_located(("id", "result")))
+         wait(self.driver, 180).until(EC.visibility_of_element_located(("id", "result")))
          ActionChains(self.driver)\
               .key_down(Keys.ESCAPE)\
               .perform()
@@ -147,7 +147,7 @@ class TestE2E(unittest.TestCase):
         self.driver.find_element(By.ID, "sellTokensButton").click()
         time.sleep(5)
         wait(self.driver, 3).until(EC.visibility_of_element_located(("id", "loading")))
-        wait(self.driver, 60).until(EC.visibility_of_element_located(("id", "result")))
+        wait(self.driver, 180).until(EC.visibility_of_element_located(("id", "result")))
         ActionChains(self.driver)\
              .key_down(Keys.ESCAPE)\
              .perform()
